@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Color Tester - Floating UI</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+
+    <style>
+      /* Variabel Warna Utama */
+      :root {
+        --bg-color: #f9fafb;
+        --primary-color: #ffffff;
+        --secondary-color: #eef2ff;
+        --font-color: #111827;
+        --button-link-color: #16a34a;
+        --shadow-color: #d1d5db;
+        --card-font-color: #1f2937;
+      }
+
+      /* Styling Dasar */
+      body {
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        background-color: var(--bg-color);
+        color: var(--font-color);
+        line-height: 1.7;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 1rem auto;
+        padding: 0 1.5rem;
+      }
+      section {
+        padding: 4rem 0;
+      }
+      h1,
+      h2 {
+        line-height: 1.2;
+        color: var(--font-color);
+      }
+      h1 {
+        font-size: 3rem;
+      }
+      h2 {
+        font-size: 2.25rem;
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      p {
+        color: var(--secondary-color);
+        font-size: 1.1rem;
+      }
+      a {
+        color: var(--button-link-color);
+        text-decoration: none;
+      }
+
+      /* -- UI TOOLBAR PICKER BARU -- */
+      .picker-toolbar {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%); /* Posisi di tengah */
+        z-index: 1000;
+
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px); /* Efek glassmorphism */
+
+        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+      }
+      /* State ketika toolbar disembunyikan */
+      .picker-toolbar.is-hidden {
+        opacity: 0;
+        transform: translateX(-50%) translateY(150%); /* Geser ke bawah */
+      }
+      .picker-wrapper {
+        text-align: center;
+      }
+      .picker-wrapper label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #6b7280;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      .pickr .pcr-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+      }
+
+      /* --- Sisa Styling Halaman (Sama seperti sebelumnya) --- */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--secondary-color);
+      }
+      .nav-logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--font-color);
+      }
+      .nav-links a {
+        margin-left: 2rem;
+        font-weight: 500;
+      }
+      .nav-links a:hover {
+        color: var(--button-link-color);
+      }
+      .hero {
+        text-align: center;
+        padding: 6rem 0;
+      }
+      .hero p {
+        max-width: 600px;
+        margin: 1rem auto 2rem;
+      }
+      .btn {
+        display: inline-block;
+        background-color: var(--button-link-color);
+        color: #fff;
+        padding: 0.8rem 2rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: transform 0.2s;
+      }
+      .btn:hover {
+        transform: scale(1.05);
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+      .feature-card {
+        background-color: var(--primary-color);
+        color: var(--card-font-color);
+        padding: 2rem;
+        border-radius: 12px;
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 10px 20px -5px var(--shadow-color);
+      }
+      .feature-card:hover {
+        transform: translateY(-5px);
+      }
+      .feature-card h3 {
+        color: var(--card-font-color);
+      }
+      .feature-card p {
+        color: var(--card-font-color);
+        opacity: 0.8;
+        font-size: 1rem;
+      }
+      .feature-card .icon {
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: var(--card-font-color);
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        border-radius: 50%;
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+      }
+      .cta-section {
+        background-color: var(--primary-color);
+        border-radius: 16px;
+        padding: 4rem;
+        text-align: center;
+        box-shadow: 0 10px 20px -5px var(--shadow-color);
+      }
+      .cta-section h2,
+      .cta-section p {
+        color: var(--card-font-color);
+      }
+      .cta-section .btn {
+        background-color: var(--button-link-color);
+        color: #fff;
+      }
+      .footer {
+        padding: 4rem 0;
+        margin-top: 4rem;
+        border-top: 1px solid var(--secondary-color);
+        color: var(--secondary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="picker-toolbar" class="picker-toolbar"></div>
+
+    <div class="container">
+      <nav class="navbar">
+        <span class="nav-logo">BrandAnda</span>
+        <div class="nav-links">
+          <a href="#">Beranda</a><a href="#">Fitur</a><a href="#">Harga</a
+          ><a href="#">Kontak</a>
+        </div>
+      </nav>
+    </div>
+    <main>
+      <header class="hero container">
+        <h1>Desain Landing Page Impian Anda</h1>
+        <p>
+          Gerakkan mouse atau scroll untuk memunculkan panel warna di bawah.
+        </p>
+        <a href="#" class="btn">Mulai Sekarang</a>
+      </header>
+      <section id="features" class="container">
+        <h2>Kenapa Memilih Kami?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="icon">🚀</div>
+            <h3>Cepat & Efisien</h3>
+            <p>Template kami dioptimalkan untuk kecepatan.</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">🎨</div>
+            <h3>Desain Fleksibel</h3>
+            <p>Ubah warna, font, dan layout sesuai kebutuhan.</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon">📱</div>
+            <h3>Sepenuhnya Responsif</h3>
+            <p>Tampilan sempurna di semua perangkat.</p>
+          </div>
+        </div>
+      </section>
+      <section class="container">
+        <div class="cta-section">
+          <h2>Siap untuk Memulai Proyek Anda?</h2>
+          <p>
+            Jangan ragu untuk menghubungi kami jika Anda memiliki pertanyaan.
+          </p>
+          <br /><a href="#" class="btn">Hubungi Kami</a>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container" style="text-align: center">
+        <p>&copy; 2025 BrandAnda. Semua Hak Cipta Dilindungi.</p>
+      </div>
+    </footer>
+
+    <script>
+      window.addEventListener("load", () => {
+        const root = document.documentElement;
+        const getCssVariable = (variable) =>
+          getComputedStyle(root).getPropertyValue(variable).trim();
+
+        // -- BAGIAN 1: Membuat Picker --
+        const toolbar = document.getElementById("picker-toolbar");
+        const colorControlsConfig = [
+          { label: "Latar", cssVar: "--bg-color" },
+          { label: "Card BG", cssVar: "--primary-color" },
+          { label: "Card Font", cssVar: "--card-font-color" },
+          { label: "Aksen", cssVar: "--secondary-color" },
+          { label: "Font", cssVar: "--font-color" },
+          { label: "Button", cssVar: "--button-link-color" },
+          { label: "Shadow", cssVar: "--shadow-color" },
+        ];
+
+        colorControlsConfig.forEach((config) => {
+          const wrapper = document.createElement("div");
+          wrapper.className = "picker-wrapper";
+
+          const label = document.createElement("label");
+          label.textContent = config.label;
+
+          const pickerPlaceholder = document.createElement("div");
+
+          wrapper.append(label, pickerPlaceholder);
+          toolbar.append(wrapper);
+
+          const pickr = Pickr.create({
+            el: pickerPlaceholder,
+            theme: "monolith",
+            default: getCssVariable(config.cssVar),
+            cssVar: config.cssVar,
+            // PERUBAHAN: Mengatur posisi picker agar membuka ke atas
+            position: "top-middle",
+            components: {
+              preview: true,
+              opacity: true,
+              hue: true,
+              interaction: { hex: true, rgba: true, input: true, save: false },
+            },
+          });
+
+          pickr
+            .on("change", (color, source, instance) => {
+              root.style.setProperty(
+                instance.options.cssVar,
+                color.toHEXA().toString()
+              );
+            })
+            .on("hide", (instance) => {
+              const finalColor = instance.getColor().toHEXA().toString();
+              instance.setColor(finalColor);
+              root.style.setProperty(instance.options.cssVar, finalColor);
+            });
+        });
+
+        // -- BAGIAN 2: LOGIKA AUTO HIDE/SHOW TOOLBAR --
+        let idleTimer = null;
+        const showDuration = 3000; // Toolbar akan hilang setelah 3 detik tidak aktif
+
+        const showToolbar = () => {
+          // Hapus timer yang sedang berjalan agar tidak tumpang tindih
+          clearTimeout(idleTimer);
+          // Tampilkan toolbar
+          toolbar.classList.remove("is-hidden");
+          // Atur timer baru untuk menyembunyikan toolbar lagi
+          idleTimer = setTimeout(() => {
+            toolbar.classList.add("is-hidden");
+          }, showDuration);
+        };
+
+        // Pemicu untuk menampilkan toolbar
+        window.addEventListener("mousemove", showToolbar);
+        window.addEventListener("scroll", showToolbar);
+
+        // Jaga agar toolbar tetap muncul jika mouse berada di atasnya
+        toolbar.addEventListener("mouseenter", () => clearTimeout(idleTimer));
+        // Sembunyikan lagi jika mouse keluar dari toolbar
+        toolbar.addEventListener("mouseleave", showToolbar);
+
+        // Tampilkan toolbar saat pertama kali halaman dimuat
+        showToolbar();
+      });
+    </script>
+  </body>
+</html>
