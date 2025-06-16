@@ -6,6 +6,7 @@
   "scripts": {
     "watch:css": "tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch",
     "build:css": "tailwindcss -i ./public/css/input.css -o ./public/css/style.css --minify",
+    "build": "tailwindcss -i ./public/css/input.css -o ./public/css/style.css",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js"
   },
