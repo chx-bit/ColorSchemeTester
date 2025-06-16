@@ -1,0 +1,10 @@
+.vercel
+.env
+node_modules/
+
+# Abaikan folder hasil build (praktik terbaik)
+/dist
+/build
+
+# Atau abaikan file output secara spesifik
+public/css/style.css

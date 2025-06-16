@@ -1,0 +1,51 @@
+/* Import Tailwind dan Google Fonts */
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=VT323&display=swap");
+/* Konfigurasi Tema Utama (Pengganti tailwind.config.js untuk tema)
+*/
+@theme {
+  /* Definisikan warna-warna kustom Anda di sini */
+  --color-primary: #f9fafb;
+  --color-card: #ffffff;
+  --color-secondary: #eef2ff;
+  --color-font-primary: #111827;
+  --color-button: #16a34a;
+  --color-shadow: #d1d5db;
+  --color-card-font: #1f2937;
+
+  /* Definisikan font family */
+  --font-family-poppins: "poppins", sans-serif;
+  --font-family-inter: "inter", sans-serif;
+  --font-family-pixel: "vt323", monospace;
+}
+@utility typing {
+  border-right: 5px solid black;
+  overflow: hidden;
+  white-space: nowrap;
+  width:500px;
+  animation: type 10s steps(26), cursor 0.75s step-end infinite;
+}
+@keyframes type {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes cursor {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: black;
+  }
+}
+
+@utility flex-center-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

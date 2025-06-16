@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Dynamic Color Tester - Tailwind v4</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=VT323&display=swap');
+      .picker-toolbar {
+        background-color: rgba(114, 114, 114, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .picker-toolbar.is-hidden {
+        opacity: 0;
+        transform: translateY(150%);
+      }
+
+      .pickr .pcr-button {
+        width: 40px;
+        height: 40px;
+      }
+
+      @media (max-width: 600px) {
+        .pickr .pcr-button {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    class="font-family-pixel min-h-screen bg-primary text-font-primary antialiased leading-relaxed"
+  >
+    <div
+      id="picker-toolbar"
+      class="picker-toolbar fixed bottom-5 left-1/2 z-[1000] font-family-poppins flex -translate-x-1/2 gap-4 rounded-2xl border-2 border-[#f9f9f9] pb-1 px-4 pt-4 sm:p-4 shadow-[0_5px_10px_rgba(0,0,0,0.2)] transition-all duration-600 ease-out"
+    ></div>
+    <h1 class=" typing text-7xl font-family-pixel">
+      Dynamic Color Scheme Tester
+    </h1>
+    <script>
+      window.addEventListener("load", () => {
+        const root = document.documentElement;
+        const getCssVariable = (variable) =>
+          getComputedStyle(root).getPropertyValue(variable).trim();
+        const toolbar = document.getElementById("picker-toolbar");
+        const colorControlsConfig = [
+          { label: "Primary", cssVar: "--color-primary" },
+          { label: "Secondary", cssVar: "--color-secondary" },
+          { label: "Card BG", cssVar: "--color-card" },
+          { label: "Card Font", cssVar: "--color-card-font" },
+          { label: "Font Primary", cssVar: "--color-font-primary" },
+          { label: "Button", cssVar: "--color-button" },
+          { label: "Shadow", cssVar: "--color-shadow" },
+        ];
+
+        colorControlsConfig.forEach((config) => {
+          const wrapper = document.createElement("div");
+          wrapper.className = "text-center";
+          const label = document.createElement("label");
+          label.className =
+            "mt-1 block text-[12px] sm:text-xs font-medium text-gray-900";
+          label.textContent = config.label;
+          const pickerPlaceholder = document.createElement("div");
+          wrapper.append(pickerPlaceholder, label);
+          toolbar.append(wrapper);
+          const pickr = Pickr.create({
+            el: pickerPlaceholder,
+            theme: "monolith",
+            default: getCssVariable(config.cssVar) || "#ffffff",
+            cssVar: config.cssVar,
+            position: "top-middle",
+            components: {
+              preview: true,
+              opacity: true,
+              hue: true,
+              interaction: { hex: true, rgba: true, input: true, save: false },
+            },
+          });
+          pickr
+            .on("change", (color, source, instance) => {
+              root.style.setProperty(
+                instance.options.cssVar,
+                color.toHEXA().toString()
+              );
+            })
+            .on("hide", (instance) => {
+              const finalColor = instance.getColor().toHEXA().toString();
+              instance.setColor(finalColor);
+              root.style.setProperty(instance.options.cssVar, finalColor);
+            });
+        });
+        let idleTimer = null;
+        const showDuration = 3000;
+        const showToolbar = () => {
+          clearTimeout(idleTimer);
+          toolbar.classList.remove("is-hidden");
+          idleTimer = setTimeout(() => {
+            toolbar.classList.add("is-hidden");
+          }, showDuration);
+        };
+        window.addEventListener("mousemove", showToolbar);
+        window.addEventListener("scroll", showToolbar);
+        toolbar.addEventListener("mouseenter", () => clearTimeout(idleTimer));
+        toolbar.addEventListener("mouseleave", showToolbar);
+        showToolbar();
+      });
+    </script>
+  </body>
+</html>
