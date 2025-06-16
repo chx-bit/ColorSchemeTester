@@ -22,15 +22,22 @@
   border-right: 5px solid black;
   overflow: hidden;
   white-space: nowrap;
-  width:500px;
-  animation: type 10s steps(26), cursor 0.75s step-end infinite;
+  max-width:660px;
+  width:100%;
+  animation: type 10s steps(40, jump-none) infinite, cursor 0.9s step-end infinite;
 }
 @keyframes type {
-  from {
-    width: 0;
+  0% {
+    width: 0%;
   }
-  to {
+  50% {
     width: 100%;
+  }
+  90%{
+    width: 0%;
+  }
+  100% {
+    width: 0%;
   }
 }
 
