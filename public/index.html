@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="id">
+<html class="overflow-hidden" lang="id">
   <head>
     <meta charset="UTF-8" />
 
@@ -16,7 +16,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
-
+    <script
+      src="https://kit.fontawesome.com/ab905a7751.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./css/style.css" />
 
     <script
@@ -25,7 +28,7 @@
     ></script>
 
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=VT323&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=VT323&display=swap");
       .picker-toolbar {
         background-color: rgba(114, 114, 114, 0.1);
         backdrop-filter: blur(10px);
@@ -51,15 +54,44 @@
   </head>
 
   <body
-    class="font-family-pixel flex-center-all min-h-screen bg-primary text-font-primary antialiased leading-relaxed"
+    class="font-family-poppins min-h-screen bg-primary text-font-primary antialiased leading-relaxed"
   >
+    <nav class="flex text-sm justify-between ">
+      <div>
+        <i class="fa fa-pallete text-red-600"></i> 
+        <span>Color Pallete</span>
+      </div>
+      <div id="navbardesk" class="hidden sm:flex">
+        <a href="">Home</a>
+        <a href="">About</a>
+        <a href="">Feature</a>
+        <a href="">Contact</a>
+      </div>
+      <div id="navbarmobile" class="sm:hidden absolute right-[-150vh]">
+        <div class="flex">
+          <a href="">Home</a>
+          <a href="">About</a>
+          <a href="">Feature</a>
+          <a href="">Contact</a>
+        </div>
+      </div>
+      <a href="" class="">
+        <i class="fa fa-bars text-red-700"></i>
+      </a>
+      <button class="hidden"></button>
+    </nav>
     <div
       id="picker-toolbar"
-      class="picker-toolbar fixed bottom-5 left-1/2 z-[1000] font-family-poppins flex -translate-x-1/2 gap-4 rounded-2xl border-2 border-[#f9f9f9] pb-1 px-4 pt-4 sm:p-4 shadow-[0_5px_10px_rgba(0,0,0,0.2)] transition-all duration-600 ease-out"
+      class="picker-toolbar color-font-primary fixed bottom-5 left-1/2 z-[1000] font-family-poppins flex -translate-x-1/2 gap-4 rounded-2xl border-1 border-[#f9f9f9] pb-1 px-4 pt-4 sm:p-4 shadow-[0_5px_10px_rgba(0,0,0,0.2)] transition-all duration-600 ease-out"
     ></div>
-    <h1 class=" typing text-6xl text-left font-family-pixel">
-      Dynamic Color Scheme Tester
-    </h1>
+    <div class="flex-center-all min-h-screen">
+      <h1
+        class="border-r-2 color-font-primary typing-effect text-2xl sm:text-4xl md:text-6xl font-[500] text-left font-family-poppins"
+      >
+        Dynamic Color Scheme Tester.
+      </h1>
+    </div>
+    <button class="btn-primary">tes</button>
     <script>
       window.addEventListener("load", () => {
         const root = document.documentElement;
@@ -81,7 +113,7 @@
           wrapper.className = "text-center";
           const label = document.createElement("label");
           label.className =
-            "mt-1 block text-[12px] sm:text-xs font-medium text-gray-900";
+            "mt-1 block text-[10px] sm:text-xs font-medium color-font-primary";
           label.textContent = config.label;
           const pickerPlaceholder = document.createElement("div");
           wrapper.append(pickerPlaceholder, label);

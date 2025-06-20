@@ -5,10 +5,10 @@
 */
 @theme {
   /* Definisikan warna-warna kustom Anda di sini */
-  --color-primary: #f9fafb;
+  --color-primary: #121212;
   --color-card: #ffffff;
   --color-secondary: #eef2ff;
-  --color-font-primary: #111827;
+  --color-font-primary: #f9f9f9;
   --color-button: #16a34a;
   --color-shadow: #d1d5db;
   --color-card-font: #1f2937;
@@ -17,14 +17,43 @@
   --font-family-poppins: "poppins", sans-serif;
   --font-family-inter: "inter", sans-serif;
   --font-family-pixel: "vt323", monospace;
+  --font-family-pixelsans: "pixelify sans", sans-serif;
 }
-@utility typing {
-  border-right: 5px solid black;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width:660px;
-  width:100%;
-  animation: type 10s steps(40, jump-none) infinite, cursor 0.9s step-end infinite;
+@layer utilities {
+  .flex-center-all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .flex-center-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: fit-content;
+    animation: type 10s steps(40, jump-none) infinite,
+      cursor 0.9s step-end infinite;
+  }
+  .aos-fadeup {
+    animation: aos-fadeup 3s ease-out;
+
+  }
+}
+@keyframes aos-fadeup {
+  from {
+    opacity: 0;
+    
+    scale: 0.5;
+  }
+  to {
+    opacity: 1;
+
+    scale: 1;
+  }
 }
 @keyframes type {
   0% {
@@ -33,7 +62,7 @@
   50% {
     width: 100%;
   }
-  90%{
+  90% {
     width: 0%;
   }
   100% {
@@ -49,10 +78,4 @@
   50% {
     border-color: black;
   }
-}
-
-@utility flex-center-all {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
