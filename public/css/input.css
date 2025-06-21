@@ -1,8 +1,6 @@
-/* Import Tailwind dan Google Fonts */
+
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=VT323&display=swap");
-/* Konfigurasi Tema Utama (Pengganti tailwind.config.js untuk tema)
-*/
 @theme {
   /* Definisikan warna-warna kustom Anda di sini */
   --color-primary: #121212;
@@ -19,47 +17,22 @@
   --font-family-pixel: "vt323", monospace;
   --font-family-pixelsans: "pixelify sans", sans-serif;
 }
-@layer utilities {
-  .flex-center-all {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .flex-center-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .typing-effect {
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: fit-content;
-    animation: type 10s steps(40, jump-none) infinite,
-      cursor 0.9s step-end infinite;
-  }
-  .aos-fadeup {
-    animation: aos-fadeup 3s ease-out;
-
-  }
-}
-@keyframes aos-fadeup {
-  from {
-    opacity: 0;
-    
-    scale: 0.5;
-  }
-  to {
-    opacity: 1;
-
-    scale: 1;
-  }
+@utility typing {
+  border-right: 5px solid black;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width:660px;
+  width:100%;
+  animation: type 10s steps(40, jump-none) infinite, cursor 0.9s step-end infinite;
 }
 @keyframes type {
   0% {
     width: 0%;
   }
-  50% {
+  15% {
+    width: 100%;
+  }
+  75%{
     width: 100%;
   }
   90% {
