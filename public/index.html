@@ -1,12 +1,8 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-
-<html class="overflow-hidden" lang="id">
-=======
 <html lang="id">
->>>>>>> 34d229c0c957b9a538c85eeed8f58e6a46464e15
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Dynamic Color Tester - Tailwind v4</title>
@@ -31,7 +27,7 @@
     ></script>
 
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=VT323&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=VT323&display=swap");
       .picker-toolbar {
         background-color: rgba(114, 114, 114, 0.1);
         backdrop-filter: blur(10px);
@@ -59,43 +55,179 @@
   <body
     class="font-family-poppins min-h-screen bg-primary text-font-primary antialiased leading-relaxed"
   >
-    <nav class="flex text-sm justify-between ">
-      <div>
-        <i class="fa fa-pallete text-red-600"></i> 
-        <span>Color Pallete</span>
+    <nav class="flex items-center text-sm justify-between px-6 py-4">
+      <div class="flex justify-center items-center text-2xl">
+        <img src="color-palette.png" alt="color" class="w-8 mr-2" />
+        <span class="font-semibold">Dy</span>
+        <p class="font-bold animated-gradient-text text-transparent">namic</p>
       </div>
-      <div id="navbardesk" class="hidden sm:flex">
-        <a href="">Home</a>
-        <a href="">About</a>
-        <a href="">Feature</a>
-        <a href="">Contact</a>
+      <div id="navbardesk" class="not-sm:hidden not-md:hidden flex gap-6">
+        <a
+          href=""
+          class="rounded-2xl px-5 py-2 hover:bg-[#ffffff09] easeout600 hover:scale-110"
+          >Home</a
+        >
+        <a
+          href=""
+          class="rounded-2xl px-5 py-2 hover:bg-[#ffffff09] easeout600 hover:scale-110"
+          >About</a
+        >
+        <a
+          href=""
+          class="rounded-2xl px-5 py-2 hover:bg-[#ffffff09] easeout600 hover:scale-110"
+          >Feature</a
+        >
+        <a
+          href=""
+          class="rounded-2xl px-5 py-2 hover:bg-[#ffffff09] easeout600 hover:scale-110"
+          >Contact</a
+        >
       </div>
-      <div id="navbarmobile" class="sm:hidden absolute right-[-150vh]">
-        <div class="flex">
-          <a href="">Home</a>
-          <a href="">About</a>
-          <a href="">Feature</a>
-          <a href="">Contact</a>
+      <div
+        id="navbarmobile"
+        class="sm:hidden absolute top-[6rem] left-0 right-0 mx-10 p-6 bg-transparent rounded-2xl border-[1px] border-[#ffffff3b] backdrop-blur-xs opacity-0 pointer-events-none transition-all duration-600 ease-out"
+      >
+        <div class="flex-center-all flex-col gap-2 text-xl text-center">
+          <a
+            href=""
+            class="rounded-2xl p-3 w-[100%] hover:bg-[#ffffff09] easeout600"
+            >Home</a
+          >
+          <a
+            href=""
+            class="rounded-2xl p-3 w-[100%] hover:bg-[#ffffff09] easeout600"
+            >About</a
+          >
+          <a
+            href=""
+            class="rounded-2xl p-3 w-[100%] hover:bg-[#ffffff09] easeout600"
+            >Feature</a
+          >
+          <a
+            href=""
+            class="rounded-2xl p-3 w-[100%] hover:bg-[#ffffff09] easeout600"
+            >Contact</a
+          >
         </div>
       </div>
-      <a href="" class="">
-        <i class="fa fa-bars text-red-700"></i>
-      </a>
-      <button class="hidden"></button>
+      <button id="toggle" class="cursor-pointer z-[1001] sm:hidden">
+        <i
+          class="fa-solid fa-bars text-[30px] text-transparent animated-gradient-text"
+        ></i>
+      </button>
+      <button
+        class="not-sm:hidden not-md:hidden font-family-poppins font-semibold text-[14px] bg-violet-600 text-[#f9f9f9] rounded-2xl py-1.5 px-3.5"
+      >
+        Support Me!
+      </button>
     </nav>
     <div
       id="picker-toolbar"
       class="picker-toolbar color-font-primary fixed bottom-5 left-1/2 z-[1000] font-family-poppins flex -translate-x-1/2 gap-4 rounded-2xl border-1 border-[#f9f9f9] pb-1 px-4 pt-4 sm:p-4 shadow-[0_5px_10px_rgba(0,0,0,0.2)] transition-all duration-600 ease-out"
     ></div>
-    <div class="flex-center-all min-h-screen">
+    <div class="fixed w-screen h-screen z-[-10]">
+      <div
+        class="absolute rounded-[100%] top-[-20dvh] sm:top-[-60dvh] right-0 size-[300px] sm:size-[500px] bg-conic from-violet-500/40 to-blue-700/30 to-50% blur-3xl"
+      ></div>
+    </div>
+    <div class="flex-center-all min-h-[80dvh] max-w-screen">
       <h1
-        class="border-r-2 color-font-primary typing-effect text-2xl sm:text-4xl md:text-6xl font-[500] text-left font-family-poppins"
+        id="typing-effect"
+        class="color-font-primary typing-effect text-5xl sm:text-6xl md:text-7xl font-[500] text-center font-family-pixelsans"
       >
         Dynamic Color Scheme Tester.
       </h1>
     </div>
-    <button class="btn-primary">tes</button>
+    <button class="btn-primary min-h-[100vh]">tes</button>
     <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const toggleButton = document.getElementById("toggle");
+        const mobileNav = document.getElementById("navbarmobile");
+        const toggleIcon = toggleButton.querySelector("i");
+        toggleButton.addEventListener("click", () => {
+          if (mobileNav.classList.contains("top-[6rem]")) {
+            mobileNav.classList.remove("top-[6rem]");
+            mobileNav.classList.remove("opacity-100");
+            mobileNav.classList.remove("pointer-events-auto");
+
+            mobileNav.classList.add("top-[-50dvh]");
+            mobileNav.classList.add("opacity-0");
+            mobileNav.classList.add("pointer-events-none");
+
+            toggleIcon.classList.remove("fa-xmark");
+            toggleIcon.classList.add("fa-bars");
+          } else {
+            mobileNav.classList.remove("top-[-50dvh]");
+            mobileNav.classList.remove("opacity-0");
+            mobileNav.classList.remove("pointer-events-none");
+
+            mobileNav.classList.add("top-[6rem]");
+            mobileNav.classList.add("opacity-100");
+            mobileNav.classList.add("pointer-events-auto");
+
+            toggleIcon.classList.remove("fa-bars");
+            toggleIcon.classList.add("fa-xmark");
+          }
+        });
+        const headingElement = document.getElementById("typing-effect");
+
+        const textToType =
+          "Dynamic Color<br class='block sm:hidden'> Scheme Tester.";
+
+        const typingSpeed = 150;
+        const erasingSpeed = 100;
+        const delayBeforeErase = 8000;
+
+        function createCursor() {
+          const cursor = document.createElement("span");
+          cursor.className =
+            "inline-block w-[4px] h-[1em] ml-2 bg-font-primary animate-[blink_1s_infinite]";
+          return cursor;
+        }
+
+        // Fungsi utama
+        async function typingLoop() {
+          let currentText = "";
+          const cursor = createCursor();
+          headingElement.append(cursor);
+
+          while (true) {
+            // --- FASE MENGETIK ---
+            for (let i = 0; i < textToType.length; i++) {
+              if (textToType.substring(i).startsWith("<br")) {
+                const brTag = "<br class='block sm:hidden'>";
+                currentText += brTag;
+                i += brTag.length - 1;
+              } else {
+                currentText += textToType[i];
+              }
+              headingElement.innerHTML = currentText;
+              headingElement.append(cursor);
+              await new Promise((resolve) => setTimeout(resolve, typingSpeed));
+            }
+
+            await new Promise((resolve) =>
+              setTimeout(resolve, delayBeforeErase)
+            );
+
+            for (let i = currentText.length; i > 0; i--) {
+              if (currentText.endsWith("<br class='block sm:hidden'>")) {
+                const brTag = "<br class='block sm:hidden'>";
+                currentText = currentText.slice(0, -brTag.length);
+                i -= brTag.length - 1;
+              } else {
+                currentText = currentText.slice(0, -1);
+              }
+              headingElement.innerHTML = currentText;
+              headingElement.append(cursor);
+              await new Promise((resolve) => setTimeout(resolve, erasingSpeed));
+            }
+          }
+        }
+
+        // Mulai animasi
+        typingLoop();
+      });
       window.addEventListener("load", () => {
         const root = document.documentElement;
         const getCssVariable = (variable) =>
